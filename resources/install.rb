@@ -43,10 +43,12 @@ action :install do
     line 'worker_processes  auto;'
   end
 
-  insert_line_after '/usr/local/openresty/nginx/conf/nginx.conf' do
-    line 'worker_processes  auto;'
-    insert 'user www-data;'
-    not_if 'grep "user www-data;" /usr/local/openresty/nginx/conf/nginx.conf'
+  if node['platform'] == 'ubuntu' || node['platform'] == 'debian'
+    insert_line_after '/usr/local/openresty/nginx/conf/nginx.conf' do
+      line 'worker_processes  auto;'
+      insert 'user www-data;'
+      not_if 'grep "user www-data;" /usr/local/openresty/nginx/conf/nginx.conf'
+    end
   end
 
   insert_line_after '/usr/local/openresty/nginx/conf/nginx.conf' do
