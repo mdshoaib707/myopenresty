@@ -1,5 +1,4 @@
-# Stop dance for OpenResty
-# A modification of the Nginx systemd script
+# Nginx systemd script
 # =======================
 #
 # ExecStop sends SIGSTOP (graceful stop) to the Nginx process.

@@ -22,7 +22,6 @@ action :install do
 
   execute 'configure' do
     cwd "/opt/#{openresty_ver}"
-    # command "./configure --with-luajit --with-http_ssl_module -j2"
     command node['myopenresty']['configcommand']
   end
 
@@ -30,12 +29,6 @@ action :install do
     cwd "/opt/#{openresty_ver}"
     command 'make -j2 && make install'
   end
-
-  # replace_or_add 'user' do
-  #   path '/usr/local/openresty/nginx/conf/nginx.conf'
-  #   pattern 'user*'
-  #   line 'user www-data;'
-  # end
 
   replace_or_add 'worker process' do
     path '/usr/local/openresty/nginx/conf/nginx.conf'
